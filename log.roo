@@ -1,0 +1,38 @@
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 18:28:11
+project --topLevelPackage com.banco
+jpa setup --provider HIBERNATE --database POSTGRES
+enum type --class ~.reference.TipoMovimiento
+enum constant --name CREDITO
+enum constant --name DEBITO
+/*
+entity jpa --class ~.domain.Movimiento --sequenceName MOV_SEQ
+entity jpa --class ~.domain.Cuenta --sequenceName CUENTA_SEQ
+entity jpa --class ~.domain.Cliente --sequenceName CLIENTE_SEQ
+/*
+field string --fieldName nombre --sizeMin 3 --sizeMax 30 --class ~.domain.Cliente
+field string --fieldName direccion --notNull --sizeMax 50 --sizeMin 1
+field string --fieldName telefone --notNull
+field string --fieldName numero --unique --class ~.domain.Cuenta
+field number --fieldName saldo --type java.math.BigDecimal --notNull --min 0
+field reference --fieldName cliente --type ~.domain.Cliente
+/*
+field date --fieldName fecha --type java.util.Date --notNull --class ~.domain.Movimiento
+field reference --fieldName cuenta --type ~.domain.Cuenta
+field number --fieldName valor --type java.math.BigDecimal --notNull --min 0
+field enum --fieldName tipo --type ~.reference.TipoMovimiento --notNull
+field set --class ~.domain.Cuenta --fieldName movimientos --type ~.domain.Movimiento --mappedBy cuenta --notNull false --cardinality ONE_TO_MANY
+field set --class ~.domain.Cliente --fieldName cuentas --type ~.domain.Cuenta --mappedBy cliente --notNull false --cardinality ONE_TO_MANY
+/*
+test integration --entity ~.domain.Cliente
+test integration --entity ~.domain.Cuenta
+test integration --entity ~.domain.Movimiento
+web mvc setup
+web mvc all --package ~.web
+/*
+selenium test --controller ~.web.ClienteController
+selenium test --controller ~.web.CuentaController
+selenium test --controller ~.web.MovimientoController
+logging setup --level INFO
+// script --file banco.roo
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-11 18:28:22
