@@ -36,3 +36,13 @@ logging setup --level INFO
 // script --file banco.roo
 quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-11 18:28:22
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 20:01:06
+security setup
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-11 20:01:13
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 23:14:24
+perform eclipse
+quit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-11 23:15:21
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 23:15:39
+perform eclipse
