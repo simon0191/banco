@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(sequenceName = "CLIENTE_SEQ")
+@RooJpaActiveRecord(sequenceName = "CLIENTE_SEQ", finders = { "findClientesByUsuarioEquals" })
 public class Cliente {
 
     /**

@@ -15,7 +15,7 @@ import javax.persistence.Enumerated;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(sequenceName = "MOV_SEQ")
+@RooJpaActiveRecord(sequenceName = "MOV_SEQ", finders = { "findMovimientoesByCuenta" })
 public class Movimiento {
 
     /**

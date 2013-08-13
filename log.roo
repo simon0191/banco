@@ -56,3 +56,14 @@ controller class --class ~.web.AdminController
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-13 10:39:43
 perform tests
 perform tests
+finder list --class ~.domain.Movimiento
+finder list --class ~.domain.Cliente
+finder list --class ~.domain.Cliente
+finder list
+finder add findClientesByUsuarioEquals
+focus --class ~.domain.Cuenta
+finder list
+finder add findCuentasByCliente
+focus --class ~.domain.Movimiento
+finder list
+finder add findMovimientoesByCuenta
