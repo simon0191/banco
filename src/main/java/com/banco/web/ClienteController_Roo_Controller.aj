@@ -5,6 +5,7 @@ package com.banco.web;
 
 import com.banco.domain.Cliente;
 import com.banco.domain.Cuenta;
+import com.banco.domain.UsuarioRol;
 import com.banco.web.ClienteController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -88,6 +89,7 @@ privileged aspect ClienteController_Roo_Controller {
     void ClienteController.populateEditForm(Model uiModel, Cliente cliente) {
         uiModel.addAttribute("cliente", cliente);
         uiModel.addAttribute("cuentas", Cuenta.findAllCuentas());
+        uiModel.addAttribute("usuariorols", UsuarioRol.findAllUsuarioRols());
     }
     
     String ClienteController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

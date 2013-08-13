@@ -26,7 +26,9 @@ privileged aspect ClienteDataOnDemand_Roo_DataOnDemand {
         Cliente obj = new Cliente();
         setDireccion(obj, index);
         setNombre(obj, index);
+        setPassword(obj, index);
         setTelefone(obj, index);
+        setUsuario(obj, index);
         return obj;
     }
     
@@ -46,9 +48,25 @@ privileged aspect ClienteDataOnDemand_Roo_DataOnDemand {
         obj.setNombre(nombre);
     }
     
+    public void ClienteDataOnDemand.setPassword(Cliente obj, int index) {
+        String password = "password_" + index;
+        if (password.length() > 70) {
+            password = password.substring(0, 70);
+        }
+        obj.setPassword(password);
+    }
+    
     public void ClienteDataOnDemand.setTelefone(Cliente obj, int index) {
         String telefone = "telefone_" + index;
         obj.setTelefone(telefone);
+    }
+    
+    public void ClienteDataOnDemand.setUsuario(Cliente obj, int index) {
+        String usuario = "usuario_" + index;
+        if (usuario.length() > 70) {
+            usuario = usuario.substring(0, 70);
+        }
+        obj.setUsuario(usuario);
     }
     
     public Cliente ClienteDataOnDemand.getSpecificCliente(int index) {

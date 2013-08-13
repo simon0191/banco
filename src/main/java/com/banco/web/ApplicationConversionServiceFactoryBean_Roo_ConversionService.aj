@@ -6,6 +6,7 @@ package com.banco.web;
 import com.banco.domain.Cliente;
 import com.banco.domain.Cuenta;
 import com.banco.domain.Movimiento;
+import com.banco.domain.UsuarioRol;
 import com.banco.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
@@ -18,7 +19,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Cliente, String> ApplicationConversionServiceFactoryBean.getClienteToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.banco.domain.Cliente, java.lang.String>() {
             public String convert(Cliente cliente) {
-                return new StringBuilder().append(cliente.getNombre()).append(' ').append(cliente.getDireccion()).append(' ').append(cliente.getTelefone()).toString();
+                return new StringBuilder().append(cliente.getNombre()).append(' ').append(cliente.getDireccion()).append(' ').append(cliente.getTelefone()).append(' ').append(cliente.getUsuario()).toString();
             }
         };
     }
@@ -87,6 +88,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<UsuarioRol, String> ApplicationConversionServiceFactoryBean.getUsuarioRolToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.banco.domain.UsuarioRol, java.lang.String>() {
+            public String convert(UsuarioRol usuarioRol) {
+                return new StringBuilder().append(usuarioRol.getAuthority()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, UsuarioRol> ApplicationConversionServiceFactoryBean.getIdToUsuarioRolConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.banco.domain.UsuarioRol>() {
+            public com.banco.domain.UsuarioRol convert(java.lang.Long id) {
+                return UsuarioRol.findUsuarioRol(id);
+            }
+        };
+    }
+    
+    public Converter<String, UsuarioRol> ApplicationConversionServiceFactoryBean.getStringToUsuarioRolConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.banco.domain.UsuarioRol>() {
+            public com.banco.domain.UsuarioRol convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), UsuarioRol.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getClienteToStringConverter());
         registry.addConverter(getIdToClienteConverter());
@@ -97,6 +122,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getMovimientoToStringConverter());
         registry.addConverter(getIdToMovimientoConverter());
         registry.addConverter(getStringToMovimientoConverter());
+        registry.addConverter(getUsuarioRolToStringConverter());
+        registry.addConverter(getIdToUsuarioRolConverter());
+        registry.addConverter(getStringToUsuarioRolConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

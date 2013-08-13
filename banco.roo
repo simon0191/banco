@@ -7,48 +7,27 @@ enum type --class ~.reference.TipoMovimiento
 enum constant --name CREDITO
 enum constant --name DEBITO
 
-
-
-/*
-entity jpa --class ~.domain.Pet --sequenceName PET_SEQ
-entity jpa --class ~.domain.Visit --sequenceName VISIT_SEQ
-entity jpa --class ~.domain.AbstractPerson --abstract
-entity jpa --class ~.domain.Vet --extends ~.domain.AbstractPerson
-entity jpa --class ~.domain.Owner --extends ~.domain.AbstractPerson
-*/
-
 /*  domain classes **/
 entity jpa --class ~.domain.Movimiento --sequenceName MOV_SEQ
 entity jpa --class ~.domain.Cuenta --sequenceName CUENTA_SEQ
 entity jpa --class ~.domain.Cliente --sequenceName CLIENTE_SEQ
+entity jpa --class ~.domain.UsuarioRol --sequenceName USUARIO_ROL_SEQ
 
-/*
-field string --fieldName firstName --sizeMin 3 --sizeMax 30 --class ~.domain.AbstractPerson
-field string --fieldName lastName --notNull --sizeMin 3 --sizeMax 30
-field string --fieldName address --notNull --sizeMax 50 --sizeMin 1
-field string --fieldName city --notNull --sizeMax 30
-field string --fieldName telephone --notNull
-field string --fieldName homePage --sizeMax 30
-field string --fieldName email --sizeMax 30 --sizeMin 6
-field date --fieldName birthDay --type java.util.Date --notNull
-*/
 /*  ~.domain.Cliente **/
 field string --fieldName nombre --sizeMin 3 --sizeMax 30 --class ~.domain.Cliente
 field string --fieldName direccion --notNull --sizeMax 50 --sizeMin 1
 field string --fieldName telefone --notNull
+field string --fieldName usuario --notNull --sizeMin 3 --sizeMax 30
+field string --fieldName password --notNull --sizeMin 3 --sizeMax 30
+
+/*  ~.domain.UsuarioRol **/
+field string --fieldName authority --class ~.domain.UsuarioRol
+field reference --fieldName cliente --type ~.domain.Cliente
 
 /*  ~.domain.Cuenta **/
 field string --fieldName numero --unique --class ~.domain.Cuenta
 field number --fieldName saldo --type java.math.BigDecimal --notNull --min 0
 field reference --fieldName cliente --type ~.domain.Cliente
-
-/*
-field boolean --fieldName sendReminders --notNull --primitive --class ~.domain.Pet
-field string --fieldName name --notNull --sizeMin 1
-field number --fieldName weight --type java.lang.Float --notNull --min 0
-field reference --fieldName owner --type ~.domain.Owner
-field enum --fieldName type --type ~.reference.PetType --notNull
-*/
 
 /*  ~.domain.Movimiento **/
 field date --fieldName fecha --type java.util.Date --notNull --class ~.domain.Movimiento
@@ -57,14 +36,11 @@ field number --fieldName valor --type java.math.BigDecimal --notNull --min 0
 field enum --fieldName tipo --type ~.reference.TipoMovimiento --notNull
 
 
-
-
 /* Relaciones */
 
-//field set --class ~.domain.Owner --fieldName pets --type ~.domain.Pet --mappedBy owner --notNull false --cardinality ONE_TO_MANY
 field set --class ~.domain.Cuenta --fieldName movimientos --type ~.domain.Movimiento --mappedBy cuenta --notNull false --cardinality ONE_TO_MANY
 field set --class ~.domain.Cliente --fieldName cuentas --type ~.domain.Cuenta --mappedBy cliente --notNull false --cardinality ONE_TO_MANY
-
+field set --class ~.domain.Cliente --fieldName roles --type ~.domain.UsuarioRol --mappedBy cliente --notNull false --cardinality ONE_TO_MANY
 
 /*
 finder add --finderName findPetsByNameAndWeight --class ~.domain.Pet
@@ -80,6 +56,7 @@ finder add --finderName findVisitsByDescriptionLike
 test integration --entity ~.domain.Cliente
 test integration --entity ~.domain.Cuenta
 test integration --entity ~.domain.Movimiento
+test integration --entity ~.domain.UsuarioRol
 
 web mvc setup
 web mvc all --package ~.web
@@ -92,6 +69,7 @@ web mvc language --code es
 selenium test --controller ~.web.ClienteController
 selenium test --controller ~.web.CuentaController
 selenium test --controller ~.web.MovimientoController
+selenium test --controller ~.web.UsuarioRolController
 
 logging setup --level INFO
 security setup

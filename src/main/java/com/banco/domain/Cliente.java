@@ -34,4 +34,21 @@ public class Cliente {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Set<Cuenta> cuentas = new HashSet<Cuenta>();
+
+    /**
+     */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private Set<UsuarioRol> roles = new HashSet<UsuarioRol>();
+
+    /**
+     */
+    @NotNull
+    @Size(min = 3, max = 70)
+    private String usuario;
+
+    /**
+     */
+    @NotNull
+    @Size(min = 3, max = 70)
+    private String password;
 }

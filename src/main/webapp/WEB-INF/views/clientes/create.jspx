@@ -7,6 +7,9 @@
         <field:textarea field="direccion" id="c_com_banco_domain_Cliente_direccion" required="true" z="uWImY6K+HUxL73TO8DPdyzOJ0Aw="/>
         <field:input field="telefone" id="c_com_banco_domain_Cliente_telefone" required="true" z="xS9JpVLhmNP5jNnxdKisiILAfOk="/>
         <field:simple field="cuentas" id="c_com_banco_domain_Cliente_cuentas" messageCode="entity_reference_not_managed" messageCodeAttribute="Cuenta" z="MrxdbggBcbpAvIhsHrRWTGYTHkk="/>
+        <field:simple field="roles" id="c_com_banco_domain_Cliente_roles" messageCode="entity_reference_not_managed" messageCodeAttribute="Usuario Rol" z="cRqu+bKuY7day0n4cNokkvbkblc="/>
+        <field:input field="usuario" id="c_com_banco_domain_Cliente_usuario" max="30" min="3" required="true" z="4injXpJk1owMzyPQKD/uSCcvVME="/>
+        <field:input field="password" id="c_com_banco_domain_Cliente_password" max="30" min="3" required="true" z="xDSVbRyoXm33Ln04jFxlrjrnius="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_banco_domain_Cliente" render="${not empty dependencies}" z="aRwuTNZ3n6G0jYQsPxCvPPhMX24="/>
 </div>

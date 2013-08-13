@@ -7,6 +7,7 @@
             <table:column id="c_com_banco_domain_Cliente_nombre" property="nombre" z="hVUzCRCYz1h84Sn2g4VkPSmSlpM="/>
             <table:column id="c_com_banco_domain_Cliente_direccion" property="direccion" z="kozTEOnOVSWYoHait4oNt1FhU/M="/>
             <table:column id="c_com_banco_domain_Cliente_telefone" property="telefone" z="3mxvDZKInRMiyN2Nmv+j0wwf7Jo="/>
+            <table:column id="c_com_banco_domain_Cliente_usuario" property="usuario" z="Q0CuBTJdDEYs5dMt7ZZNLtjCWXE="/>
         </table:table>
     </page:list>
 </div>

@@ -5,6 +5,7 @@ package com.banco.domain;
 
 import com.banco.domain.Cliente;
 import com.banco.domain.Cuenta;
+import com.banco.domain.UsuarioRol;
 import java.util.Set;
 
 privileged aspect Cliente_Roo_JavaBean {
@@ -39,6 +40,30 @@ privileged aspect Cliente_Roo_JavaBean {
     
     public void Cliente.setCuentas(Set<Cuenta> cuentas) {
         this.cuentas = cuentas;
+    }
+    
+    public Set<UsuarioRol> Cliente.getRoles() {
+        return this.roles;
+    }
+    
+    public void Cliente.setRoles(Set<UsuarioRol> roles) {
+        this.roles = roles;
+    }
+    
+    public String Cliente.getUsuario() {
+        return this.usuario;
+    }
+    
+    public void Cliente.setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
+    public String Cliente.getPassword() {
+        return this.password;
+    }
+    
+    public void Cliente.setPassword(String password) {
+        this.password = password;
     }
     
 }
