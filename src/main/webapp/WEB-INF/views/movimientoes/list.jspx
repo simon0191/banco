@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_banco_domain_Movimiento" items="${movimientoes}" z="o1F+XJqWXHiO3qPjyIBu+0R7CDY=">
-        <table:table data="${movimientoes}" id="l_com_banco_domain_Movimiento" path="/movimientoes" z="m2I/eMLnu2hONpWGkn8ij6PzrDc=">
+        <table:table data="${movimientoes}" delete="false" id="l_com_banco_domain_Movimiento" path="/movimientoes" update="false" z="asY8amD5Cbgp4x9bFOGbcZD7Uek=">
             <table:column date="true" dateTimePattern="${movimiento_fecha_date_format}" id="c_com_banco_domain_Movimiento_fecha" property="fecha" z="M9+9HWFc0800M/4gALRrzdwY4nM="/>
             <table:column id="c_com_banco_domain_Movimiento_cuenta" property="cuenta" z="riF8x/Il1sEk+Zngyw/hLdnz02o="/>
             <table:column id="c_com_banco_domain_Movimiento_valor" property="valor" z="rwZAGc3G+kYjvuziYUDxcOcfr3c="/>

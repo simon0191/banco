@@ -94,3 +94,5 @@ selenium test --controller ~.web.CuentaController
 selenium test --controller ~.web.MovimientoController
 
 logging setup --level INFO
+security setup
+perform eclipse

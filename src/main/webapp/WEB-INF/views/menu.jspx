@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
@@ -7,16 +7,21 @@
             <menu:item id="i_movimiento_new" messageCode="global_menu_new" url="/movimientoes?form" z="C2qoLWQE0d+FlX0eZIUl3AoPFew="/>
             <menu:item id="i_movimiento_list" messageCode="global_menu_list" url="/movimientoes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="S4gV5BSmsYoxvNhmTPU0fMNd5BA="/>
         </menu:category>
-        <menu:category id="c_cliente" z="OA12E4nwdOcMU0p7LaQV8KKBm5E=">
-            <menu:item id="i_cliente_new" messageCode="global_menu_new" url="/clientes?form" z="cDLtjRjIN5c0dyE1ltBb0Mk1DJo="/>
-            <menu:item id="i_cliente_list" messageCode="global_menu_list" url="/clientes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lk2UTVTUA9lz30A2vJEbY3GbO6E="/>
-        </menu:category>
-        <menu:category id="c_cuenta" z="zvzEbahYxrEGyQXWEkR0tM3nYKA=">
-            <menu:item id="i_cuenta_new" messageCode="global_menu_new" url="/cuentas?form" z="+JflC/cJi5sIHAV5tbB5vdVXCGg="/>
-            <menu:item id="i_cuenta_list" messageCode="global_menu_list" url="/cuentas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="7S2xNP/pWyOj10jVOlLgo3P57AY="/>
-        </menu:category>
+        <sec:authorize ifAllGranted="ROLE_ADMIN">
+	        <menu:category id="c_cliente" z="OA12E4nwdOcMU0p7LaQV8KKBm5E=">
+	            <menu:item id="i_cliente_new" messageCode="global_menu_new" url="/clientes?form" z="cDLtjRjIN5c0dyE1ltBb0Mk1DJo="/>
+	            <menu:item id="i_cliente_list" messageCode="global_menu_list" url="/clientes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="lk2UTVTUA9lz30A2vJEbY3GbO6E="/>
+	        </menu:category>
+	        <menu:category id="c_cuenta" z="zvzEbahYxrEGyQXWEkR0tM3nYKA=">
+	            <menu:item id="i_cuenta_new" messageCode="global_menu_new" url="/cuentas?form" z="+JflC/cJi5sIHAV5tbB5vdVXCGg="/>
+	            <menu:item id="i_cuenta_list" messageCode="global_menu_list" url="/cuentas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="7S2xNP/pWyOj10jVOlLgo3P57AY="/>
+	        </menu:category>
+        </sec:authorize>
         <menu:category id="c_seleniumtests" z="PPLMd2yNB6/LSbjIWogAacRPU+Q=">
             <menu:item id="si_seleniumtests_test" messageCode="selenium_menu_test_suite" url="/resources/selenium/test-suite.xhtml" z="wwunW/IPDcunN97u41MvMJZQ2to="/>
+        </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__adminindex_id" messageCode="global_generic" url="/admin/index" z="Vqqut04Ar2YjWWvud7/zWavBC+8="/>
         </menu:category>
     </menu:menu>
 </div>

@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_com_banco_domain_Movimiento" object="${movimiento}" path="/movimientoes" z="EYwGl7ARn9r42iIJ6CD10WqQhAU=">
+    <page:show delete="false" id="ps_com_banco_domain_Movimiento" object="${movimiento}" path="/movimientoes" update="false" z="VmZvuq3c6aYoEKs8kMQN5qQZg64=">
         <field:display date="true" dateTimePattern="${movimiento_fecha_date_format}" field="fecha" id="s_com_banco_domain_Movimiento_fecha" object="${movimiento}" z="J8MfycujN63qNHG01P+A12fpaEM="/>
         <field:display field="cuenta" id="s_com_banco_domain_Movimiento_cuenta" object="${movimiento}" z="RxfrzrD5mNe9NXx6aDGoeqaJatY="/>
         <field:display field="valor" id="s_com_banco_domain_Movimiento_valor" object="${movimiento}" z="BV7zBOJeZ3M6tmou4Mhk384CJbY="/>

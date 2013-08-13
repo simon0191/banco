@@ -46,3 +46,10 @@ quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-11 23:15:21
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 23:15:39
 perform eclipse
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 23:30:36
+perform eclipse
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-11 23:55:16
+hint
+controller class --class ~.web.AdminController
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-12 01:00:22
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-12 18:58:56

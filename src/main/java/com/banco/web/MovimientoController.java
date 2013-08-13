@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/movimientoes")
 @Controller
-@RooWebScaffold(path = "movimientoes", formBackingObject = Movimiento.class)
+@RooWebScaffold(path = "movimientoes", 
+	formBackingObject = Movimiento.class,
+	delete=false,
+	update=false
+	)
 public class MovimientoController {
 }

@@ -64,33 +64,6 @@ privileged aspect MovimientoController_Roo_Controller {
         return "movimientoes/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String MovimientoController.update(@Valid Movimiento movimiento, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, movimiento);
-            return "movimientoes/update";
-        }
-        uiModel.asMap().clear();
-        movimiento.merge();
-        return "redirect:/movimientoes/" + encodeUrlPathSegment(movimiento.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String MovimientoController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Movimiento.findMovimiento(id));
-        return "movimientoes/update";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String MovimientoController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Movimiento movimiento = Movimiento.findMovimiento(id);
-        movimiento.remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/movimientoes";
-    }
-    
     void MovimientoController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("movimiento_fecha_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }

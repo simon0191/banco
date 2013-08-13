@@ -10,7 +10,5 @@
 <definition extends="default" name="movimientoes/create">
         <put-attribute name="body" value="/WEB-INF/views/movimientoes/create.jspx"/>
     </definition>
-<definition extends="default" name="movimientoes/update">
-        <put-attribute name="body" value="/WEB-INF/views/movimientoes/update.jspx"/>
-    </definition>
+
 </tiles-definitions>
