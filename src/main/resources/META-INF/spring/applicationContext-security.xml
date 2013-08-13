@@ -28,7 +28,19 @@
 		<!-- SHA-256 values can be produced using 'echo -n your_desired_password 
 			| sha256sum' (using normal *nix environments) -->
 		<authentication-provider>
+			
 			<password-encoder hash="sha-256" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="
+		      		select c.usuario, c.password,  'true' as enabled
+		      		from cliente c where c.usuario = ?  " 
+ 
+		   		authorities-by-username-query="
+		      		select c.usuario, ur.authority from cliente c, usuario_rol ur    
+		      		where c.id = ur.cliente and c.usuario = ?  " 
+ 
+			/>
+			<!--
 			<user-service>
 				<user name="admin"
 					password="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
@@ -41,6 +53,7 @@
 					authorities="ROLE_USER" />
 
 			</user-service>
+			-->
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>
