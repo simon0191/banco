@@ -10,6 +10,6 @@ values (3,'-','user2','6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b3417
 INSERT INTO usuario_rol (id,authority,cliente)
 values (1,'ROLE_ADMIN',1);
 INSERT INTO usuario_rol (id,authority,cliente)
-values (2,'ROL_USER',2);
+values (2,'ROLE_USER',2);
 INSERT INTO usuario_rol (id,authority,cliente)
-values (3,'ROL_USER',3);
+values (3,'ROLE_USER',3);
