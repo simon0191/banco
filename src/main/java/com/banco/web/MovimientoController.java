@@ -79,9 +79,9 @@ public class MovimientoController {
 	private List<Movimiento> getMovimientosByCliente(Cliente cliente) {
 		List<Cuenta> resultList = Cuenta.findCuentasByCliente(cliente)
 				.getResultList();
-		List<Movimiento> movs = Movimiento.findMovimientoesByCuenta(resultList.get(0)).getResultList();
-		for(int i = 1;i<resultList.size();++i) {
-			movs.addAll(Movimiento.findMovimientoesByCuenta(resultList.get(i)).getResultList());
+		List<Movimiento> movs = new ArrayList<Movimiento>();
+		for(Cuenta c: resultList) {
+			movs.addAll(Movimiento.findMovimientoesByCuenta(c).getResultList());
 		}
 		return movs;
 	}
