@@ -11,4 +11,10 @@
         <put-attribute name="body" value="/WEB-INF/views/movimientoes/create.jspx"/>
     </definition>
 
+<definition extends="default" name="movimientoes/findMovimientoesByCuenta">
+        <put-attribute name="body" value="/WEB-INF/views/movimientoes/findMovimientoesByCuenta.jspx"/>
+    </definition>
+<definition extends="default" name="movimientoes/findMovimientoesByFechaBetween">
+        <put-attribute name="body" value="/WEB-INF/views/movimientoes/findMovimientoesByFechaBetween.jspx"/>
+    </definition>
 </tiles-definitions>
