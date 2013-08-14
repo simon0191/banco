@@ -46,7 +46,7 @@ public class MovimientoController {
 		}
 		else {
 			List<Movimiento> movs = getMovimientosByCliente(getLoggedCliente());
-			uiModel.addAttribute("cuentas", movs);
+			uiModel.addAttribute("movimientoes", movs);
 			addDateTimeFormatPatterns(uiModel);
 	        return "movimientoes/list";
 		}
