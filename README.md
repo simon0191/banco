@@ -90,8 +90,8 @@ Eclipse:
 1.   [Código fuente de la aplicación](https://github.com/simon0191/banco/archive/master.zip)
 2.   Paquete para despliegue: 
 
-	-[WAR](https://docs.google.com/file/d/0B0Z4F6M8dm4Ma051VDBFNVRuS2s/edit?usp=sharing)
-	-[Script para creación de base de datos](https://raw.github.com/simon0191/banco/master/src/main/resources/sql/init.sql)
+	- [WAR](https://docs.google.com/file/d/0B0Z4F6M8dm4Ma051VDBFNVRuS2s/edit?usp=sharing)
+	- [Script para creación de base de datos](https://raw.github.com/simon0191/banco/master/src/main/resources/sql/init.sql)
         
 3.   Diagrama Entidad Relación de la base de datos.
 
