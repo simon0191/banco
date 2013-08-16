@@ -17,7 +17,9 @@
 		
 		<intercept-url pattern="/cuentas/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		
+		<intercept-url pattern="/movimientoes?find**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/movimientoes/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		
 		
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/static/**" access="permitAll" />

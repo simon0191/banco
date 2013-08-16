@@ -25,7 +25,7 @@ import javax.persistence.Enumerated;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(sequenceName = "MOV_SEQ", finders = { "findMovimientoesByCuenta" })
+@RooJpaActiveRecord(sequenceName = "MOV_SEQ", finders = { "findMovimientoesByCuenta", "findMovimientoesByFechaBetween" })
 public class Movimiento {
 
     /**
@@ -52,4 +52,16 @@ public class Movimiento {
     @Enumerated
     private TipoMovimiento tipo;
     
+    public static TypedQuery<Movimiento> findMovimientoesByFechaBetween(Date minFecha, Date maxFecha, Cliente cliente) {
+        if (minFecha == null) throw new IllegalArgumentException("The minFecha argument is required");
+        if (maxFecha == null) throw new IllegalArgumentException("The maxFecha argument is required");
+        if (cliente == null ) throw new IllegalArgumentException("The cliente argument is required");
+        EntityManager em = Movimiento.entityManager();
+        TypedQuery<Movimiento> q = em.createQuery("SELECT o FROM Movimiento AS o WHERE o.cuenta.cliente = :cliente AND o.fecha BETWEEN :minFecha AND :maxFecha", Movimiento.class);
+        //TypedQuery<Movimiento> q = em.createQuery("SELECT o FROM Movimiento AS o WHERE o.fecha BETWEEN :minFecha AND :maxFecha", Movimiento.class);
+        q.setParameter("minFecha", minFecha);
+        q.setParameter("maxFecha", maxFecha);
+        q.setParameter("cliente", cliente);
+        return q;
+    }
 }
