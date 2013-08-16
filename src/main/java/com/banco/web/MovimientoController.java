@@ -1,6 +1,7 @@
 package com.banco.web;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,98 +12,117 @@ import com.banco.domain.Cuenta;
 import com.banco.domain.Movimiento;
 import com.banco.reference.TipoMovimiento;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.roo.addon.web.mvc.controller.finder.RooWebFinder;
 
 @RequestMapping("/movimientoes")
 @Controller
-@RooWebScaffold(path = "movimientoes", 
-	formBackingObject = Movimiento.class,
-	delete=false,
-	update=false
-	)
+@RooWebScaffold(path = "movimientoes", formBackingObject = Movimiento.class, delete = false, update = false)
+@RooWebFinder
 public class MovimientoController {
-	@RequestMapping(produces = "text/html")
+
+    @RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-		if(isAdmin()) {
-			if (page != null || size != null) {
-	            int sizeNo = size == null ? 10 : size.intValue();
-	            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-	            uiModel.addAttribute("movimientoes", Movimiento.findMovimientoEntries(firstResult, sizeNo));
-	            float nrOfPages = (float) Movimiento.countMovimientoes() / sizeNo;
-	            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-	        } else {
-	            uiModel.addAttribute("movimientoes", Movimiento.findAllMovimientoes());
-	        }
-	        addDateTimeFormatPatterns(uiModel);
-	        return "movimientoes/list";
-		}
-		else {
-			List<Movimiento> movs = getMovimientosByCliente(getLoggedCliente());
-			uiModel.addAttribute("cuentas", movs);
-			addDateTimeFormatPatterns(uiModel);
-	        return "movimientoes/list";
-		}
-        
+        if (isAdmin()) {
+            if (page != null || size != null) {
+                int sizeNo = size == null ? 10 : size.intValue();
+                final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+                uiModel.addAttribute("movimientoes", Movimiento.findMovimientoEntries(firstResult, sizeNo));
+                float nrOfPages = (float) Movimiento.countMovimientoes() / sizeNo;
+                uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            } else {
+                uiModel.addAttribute("movimientoes", Movimiento.findAllMovimientoes());
+            }
+            addDateTimeFormatPatterns(uiModel);
+            return "movimientoes/list";
+        } else {
+            List<Movimiento> movs = getMovimientosByCliente(getLoggedCliente());
+            uiModel.addAttribute("movimientoes", movs);
+            addDateTimeFormatPatterns(uiModel);
+            return "movimientoes/list";
+        }
     }
-	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+
+    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Movimiento movimiento, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, movimiento);
             return "movimientoes/create";
         }
-        if(movimiento.getTipo().equals(TipoMovimiento.CREDITO) && (movimiento.getCuenta().getSaldo().compareTo(movimiento.getValor()) < 0)) {
-        	bindingResult.rejectValue("valor", "account_negative_value");
-        	populateEditForm(uiModel, movimiento);
+        if (movimiento.getTipo().equals(TipoMovimiento.CREDITO) && (movimiento.getCuenta().getSaldo().compareTo(movimiento.getValor()) < 0)) {
+            bindingResult.rejectValue("valor", "account_negative_value");
+            populateEditForm(uiModel, movimiento);
             return "movimientoes/create";
         }
         uiModel.asMap().clear();
-        
         Cuenta c = movimiento.getCuenta();
-        if(movimiento.getTipo().equals(TipoMovimiento.CREDITO)) {
-        	c.setSaldo(c.getSaldo().subtract(movimiento.getValor()));
-        }
-        else {
-        	c.setSaldo(c.getSaldo().add(movimiento.getValor()));
+        if (movimiento.getTipo().equals(TipoMovimiento.CREDITO)) {
+            c.setSaldo(c.getSaldo().subtract(movimiento.getValor()));
+        } else {
+            c.setSaldo(c.getSaldo().add(movimiento.getValor()));
         }
         c.merge();
         movimiento.persist();
         return "redirect:/movimientoes/" + encodeUrlPathSegment(movimiento.getId().toString(), httpServletRequest);
     }
-	private List<Movimiento> getMovimientosByCliente(Cliente cliente) {
-		List<Cuenta> resultList = Cuenta.findCuentasByCliente(cliente)
-				.getResultList();
-		List<Movimiento> movs = new ArrayList<Movimiento>();
-		for(Cuenta c: resultList) {
-			movs.addAll(Movimiento.findMovimientoesByCuenta(c).getResultList());
-		}
-		return movs;
-	}
 
-	void populateEditForm(Model uiModel, Movimiento movimiento) {
+    private List<Movimiento> getMovimientosByCliente(Cliente cliente) {
+        List<Cuenta> resultList = Cuenta.findCuentasByCliente(cliente).getResultList();
+        List<Movimiento> movs = new ArrayList<Movimiento>();
+        for (Cuenta c : resultList) {
+            movs.addAll(Movimiento.findMovimientoesByCuenta(c).getResultList());
+        }
+        return movs;
+    }
+
+    void populateEditForm(Model uiModel, Movimiento movimiento) {
         uiModel.addAttribute("movimiento", movimiento);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("cuentas", Cuenta.findCuentasByCliente(getLoggedCliente()).getResultList());
+        if(isAdmin()){
+        	uiModel.addAttribute("cuentas", Cuenta.findAllCuentas());
+        }
+        else{
+        	uiModel.addAttribute("cuentas", Cuenta.findCuentasByCliente(getLoggedCliente()).getResultList());
+        }
         uiModel.addAttribute("tipomovimientoes", Arrays.asList(TipoMovimiento.values()));
     }
-	private boolean isAdmin() {
-		for (GrantedAuthority ga : SecurityContextHolder.getContext()
-				.getAuthentication().getAuthorities()) {
-			if (ga.getAuthority().equals("ROLE_ADMIN")) {
-				return true;
-			}
-		}
-		return false;
-	}
-	private Cliente getLoggedCliente() {
-		return Cliente.findClientesByUsuarioEquals(SecurityContextHolder.getContext().getAuthentication()
-		.getName()).getSingleResult();
-	}
+
+    @RequestMapping(params = { "find=ByFechaBetween", "form" }, method = RequestMethod.GET)
+    public String findMovimientoesByFechaBetweenForm(Model uiModel) {
+    	uiModel.addAttribute("clientes", Cliente.findAllClientes());
+        addDateTimeFormatPatterns(uiModel);
+        return "movimientoes/findMovimientoesByFechaBetween";
+    }
+    
+    @RequestMapping(params = "find=ByFechaBetween", method = RequestMethod.GET)
+    public String findMovimientoesByFechaBetween(@RequestParam("minFecha") @DateTimeFormat(style = "M-") Date minFecha, @RequestParam("maxFecha") @DateTimeFormat(style = "M-") Date maxFecha, 
+    		@ModelAttribute("cliente") @RequestParam("cliente") Cliente cliente, Model uiModel) {
+    	//cliente = Cliente.findClientesByUsuarioEquals("user1").getSingleResult();
+        uiModel.addAttribute("movimientoes", Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha,cliente).getResultList());
+        addDateTimeFormatPatterns(uiModel);
+        return "movimientoes/list";
+    }
+    
+    private boolean isAdmin() {
+        for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+            if (ga.getAuthority().equals("ROLE_ADMIN")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Cliente getLoggedCliente() {
+        return Cliente.findClientesByUsuarioEquals(SecurityContextHolder.getContext().getAuthentication().getName()).getSingleResult();
+    }
 }

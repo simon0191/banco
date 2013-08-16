@@ -20,10 +20,13 @@
                 <menu:item id="i_usuariorol_new" messageCode="global_menu_new" url="/usuariorols?form" z="kmzsS21aXiyeA1tez9R7/zIj4Eg="/>
                 <menu:item id="i_usuariorol_list" messageCode="global_menu_list" url="/usuariorols?page=1&amp;size=${empty param.size ? 10 : param.size}" z="NZypdzd60gmYKX9zaomXKG+yDLA="/>
             </menu:category>
+<<<<<<< HEAD
+=======
             <menu:category id="filters" label="Reportes" z="user-managed">
                 <menu:item id="fi_movimiento_fechabetween" messageCode="global_menu_find" url="/movimientoes?find=ByFechaBetween&amp;form" z="BauNrky8rE0F8dt3g4dGx19RO8E="/>
                 <menu:item id="fi_movimiento_cuenta" messageCode="global_menu_find" url="/movimientoes?find=ByCuenta&amp;form" z="QJtDzD7kTQvy9GTEPjvSrDdwi8Y="/>
             </menu:category>
+>>>>>>> develop
         </sec:authorize>
     </menu:menu>
 </div>
