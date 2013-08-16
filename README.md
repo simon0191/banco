@@ -30,15 +30,15 @@ Una vez autenticado, el usuario tendrá la posibilidad de llevar a cabo las sigu
 
 1.	Creación, modificación, consulta y eliminación de Clientes y Cuentas.
 
-	-	[/cuentas](http://simon0191-banco.herokuapp.com/cuentas)
-	-	[/cuentas?form](http://simon0191-banco.herokuapp.com/cuentas?form)
-	-	[/clientes](http://simon0191-banco.herokuapp.com/clientes)
-	-	[/clientes?form](http://simon0191-banco.herokuapp.com/clientes?form)
+	-[/cuentas](http://simon0191-banco.herokuapp.com/cuentas)
+	-[/cuentas?form](http://simon0191-banco.herokuapp.com/cuentas?form)
+	-[/clientes](http://simon0191-banco.herokuapp.com/clientes)
+	-[/clientes?form](http://simon0191-banco.herokuapp.com/clientes?form)
         
         
 2.	Registrar movimientos en una cuenta validando que no se permitan registrar movimientos que dejen un saldo negativo en la cuenta.
 
-	-	[/movimientoes?form](http://simon0191-banco.herokuapp.com/movimientoes?form)
+	-[/movimientoes?form](http://simon0191-banco.herokuapp.com/movimientoes?form)
     
 3.	Generar un reporte que, especificando un rango de fechas y un cliente, visualice las cuentas asociadas con sus respectivos saldos y el total de débitos y créditos realizados durante las fechas.
 	-	[/movimientoes?find=ByFechaBetween&form](http://simon0191-banco.herokuapp.com/movimientoes?find=ByFechaBetween&form)
@@ -53,7 +53,7 @@ Una vez autenticado, el usuario tendrá la posibilidad de llevar a cabo las sigu
 
 ##Instrucciones de despliegue
 
-1. Crear la base de datos utilizando el _script_ [squema.sql]((https://raw.github.com/simon0191/banco/master/src/main/resources/sql/squema.sql)) o ejecutar la aplicación y poblar la base de datos utilizando el _script_ [init.sql]((https://raw.github.com/simon0191/banco/master/src/main/resources/sql/init.sql))
+1. Crear la base de datos utilizando el _script_ [squema.sql](https://raw.github.com/simon0191/banco/master/src/main/resources/sql/squema.sql) o ejecutar la aplicación y poblar la base de datos utilizando el _script_ [init.sql](https://raw.github.com/simon0191/banco/master/src/main/resources/sql/init.sql)
 2. Importar el proyecto a Eclipse - Spring Tool Suite como "_Exisiting Maven Project_"
 2. Agregar la variable de entorno _$DATABASE\_URL_ con la siguiente estructura:
 ```
@@ -86,7 +86,8 @@ Eclipse:
 
 
 
- ##Otros
+##Otros
+
  
 1.   [Código fuente de la aplicación](https://github.com/simon0191/banco/archive/master.zip)
 2.   Paquete para despliegue: 
@@ -95,6 +96,7 @@ Eclipse:
 	-[Script para creación de base de datos](https://raw.github.com/simon0191/banco/master/src/main/resources/sql/init.sql)
         
 3.   Diagrama Entidad Relación de la base de datos.
+
 
 
 
