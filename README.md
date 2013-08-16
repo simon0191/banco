@@ -29,19 +29,17 @@ Para acceder al sistema, el usuario debe autenticarse por medio de la página de
 Una vez autenticado, el usuario tendrá la posibilidad de llevar a cabo las siguientes acciones dependiendo de su rol. Generalmente, el usuario con rol _ROLE\_ADMIN_, podrá crear crear, editar, actualizar y eliminar objetos(Cliente, Cuenta y Movimiento) de otros usuarios, mientras que los usuarios con rol _ROLE\_USER_ únicamente podrán crear, editar, actualizar y eliminar objetos que les pertenezcan.
 
 1.	Creación, modificación, consulta y eliminación de Clientes y Cuentas.
-
-	-[/cuentas](http://simon0191-banco.herokuapp.com/cuentas)
-	-[/cuentas?form](http://simon0191-banco.herokuapp.com/cuentas?form)
-	-[/clientes](http://simon0191-banco.herokuapp.com/clientes)
-	-[/clientes?form](http://simon0191-banco.herokuapp.com/clientes?form)
+	- [/cuentas](http://simon0191-banco.herokuapp.com/cuentas)
+	- [/cuentas?form](http://simon0191-banco.herokuapp.com/cuentas?form)
+	- [/clientes](http://simon0191-banco.herokuapp.com/clientes)
+	- [/clientes?form](http://simon0191-banco.herokuapp.com/clientes?form)
         
         
 2.	Registrar movimientos en una cuenta validando que no se permitan registrar movimientos que dejen un saldo negativo en la cuenta.
-
-	-[/movimientoes?form](http://simon0191-banco.herokuapp.com/movimientoes?form)
+	- [/movimientoes?form](http://simon0191-banco.herokuapp.com/movimientoes?form)
     
 3.	Generar un reporte que, especificando un rango de fechas y un cliente, visualice las cuentas asociadas con sus respectivos saldos y el total de débitos y créditos realizados durante las fechas.
-	-	[/movimientoes?find=ByFechaBetween&form](http://simon0191-banco.herokuapp.com/movimientoes?find=ByFechaBetween&form)
+	- [/movimientoes?find=ByFechaBetween&form](http://simon0191-banco.herokuapp.com/movimientoes?find=ByFechaBetween&form)
         
 ##Herramientas y tecnologías utilizadas
 
