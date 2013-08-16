@@ -1,19 +1,25 @@
 package com.banco.web;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import com.banco.domain.Cliente;
 import com.banco.domain.Cuenta;
 import com.banco.domain.Movimiento;
 import com.banco.reference.TipoMovimiento;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,10 +88,31 @@ public class MovimientoController {
     void populateEditForm(Model uiModel, Movimiento movimiento) {
         uiModel.addAttribute("movimiento", movimiento);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("cuentas", Cuenta.findCuentasByCliente(getLoggedCliente()).getResultList());
+        if(isAdmin()){
+        	uiModel.addAttribute("cuentas", Cuenta.findAllCuentas());
+        }
+        else{
+        	uiModel.addAttribute("cuentas", Cuenta.findCuentasByCliente(getLoggedCliente()).getResultList());
+        }
         uiModel.addAttribute("tipomovimientoes", Arrays.asList(TipoMovimiento.values()));
     }
 
+    @RequestMapping(params = { "find=ByFechaBetween", "form" }, method = RequestMethod.GET)
+    public String findMovimientoesByFechaBetweenForm(Model uiModel) {
+    	uiModel.addAttribute("clientes", Cliente.findAllClientes());
+        addDateTimeFormatPatterns(uiModel);
+        return "movimientoes/findMovimientoesByFechaBetween";
+    }
+    
+    @RequestMapping(params = "find=ByFechaBetween", method = RequestMethod.GET)
+    public String findMovimientoesByFechaBetween(@RequestParam("minFecha") @DateTimeFormat(style = "M-") Date minFecha, @RequestParam("maxFecha") @DateTimeFormat(style = "M-") Date maxFecha, 
+    		@ModelAttribute("cliente") @RequestParam("cliente") Cliente cliente, Model uiModel) {
+    	//cliente = Cliente.findClientesByUsuarioEquals("user1").getSingleResult();
+        uiModel.addAttribute("movimientoes", Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha,cliente).getResultList());
+        addDateTimeFormatPatterns(uiModel);
+        return "movimientoes/list";
+    }
+    
     private boolean isAdmin() {
         for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
             if (ga.getAuthority().equals("ROLE_ADMIN")) {

@@ -5,7 +5,6 @@ package com.banco.domain;
 
 import com.banco.domain.Cuenta;
 import com.banco.domain.Movimiento;
-import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -16,16 +15,6 @@ privileged aspect Movimiento_Roo_Finder {
         EntityManager em = Movimiento.entityManager();
         TypedQuery<Movimiento> q = em.createQuery("SELECT o FROM Movimiento AS o WHERE o.cuenta = :cuenta", Movimiento.class);
         q.setParameter("cuenta", cuenta);
-        return q;
-    }
-    
-    public static TypedQuery<Movimiento> Movimiento.findMovimientoesByFechaBetween(Date minFecha, Date maxFecha) {
-        if (minFecha == null) throw new IllegalArgumentException("The minFecha argument is required");
-        if (maxFecha == null) throw new IllegalArgumentException("The maxFecha argument is required");
-        EntityManager em = Movimiento.entityManager();
-        TypedQuery<Movimiento> q = em.createQuery("SELECT o FROM Movimiento AS o WHERE o.fecha BETWEEN :minFecha AND :maxFecha", Movimiento.class);
-        q.setParameter("minFecha", minFecha);
-        q.setParameter("maxFecha", maxFecha);
         return q;
     }
     

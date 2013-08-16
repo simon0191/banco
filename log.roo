@@ -69,3 +69,7 @@ finder list
 finder add findMovimientoesByCuenta
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-08-13 12:54:10
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-13 19:52:23
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-08-15 23:12:21
+focus --class ~.domain.Cliente
+finder list
+finder add findClientesByUsuarioEquals
