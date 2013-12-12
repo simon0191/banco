@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_banco_domain_Movimiento" items="${movimientoes}" z="o1F+XJqWXHiO3qPjyIBu+0R7CDY=">
+    
+    <c:if test="${consolidado}">
+    	<c:if test="${movimientos_consolidado.size() > 0}" >
+	    	<h1>Consolidado</h1>
+		    <table>
+		    	<tr class="thead">
+		    		<td ><h3>Cuenta</h3></td>
+		          	<td><h3>Total Débitos</h3></td>
+		          	<td><h3>Total Créditos</h3></td>
+		          	<td><h3>Saldo a la fecha</h3></td>
+		         </tr>
+		      	<c:forEach var="item" items="${movimientos_consolidado}">
+		        <tr>
+		          <td>${item.cuenta.numero}</td>
+		          <td>${item.debitos}</td>
+		          <td>${item.creditos}</td>
+		          <td>${item.cuenta.saldo}</td>
+		        </tr>
+		      </c:forEach>
+		    </table>
+		    <h1>Movimientos</h1>
+		   </c:if>	
+    </c:if>
+    
+    <page:list id="pl_com_banco_domain_Movimiento" items="${movimientoes}" z="o1F+XJqWXHiO3qPjyIBu+0R7CDY=" label="Movimiento">
         <table:table data="${movimientoes}" delete="false" id="l_com_banco_domain_Movimiento" path="/movimientoes" update="false" z="asY8amD5Cbgp4x9bFOGbcZD7Uek=">
             <table:column date="true" dateTimePattern="${movimiento_fecha_date_format}" id="c_com_banco_domain_Movimiento_fecha" property="fecha" z="M9+9HWFc0800M/4gALRrzdwY4nM="/>
-            <table:column id="c_com_banco_domain_Movimiento_cuenta" property="cuenta" z="riF8x/Il1sEk+Zngyw/hLdnz02o="/>
+            <table:column id="c_com_banco_domain_Movimiento_cuenta" property="cuenta" z="riF8x/Il1sEk+Zngyw/hLdnz02o=" />
             <table:column id="c_com_banco_domain_Movimiento_valor" property="valor" z="rwZAGc3G+kYjvuziYUDxcOcfr3c="/>
             <table:column id="c_com_banco_domain_Movimiento_tipo" property="tipo" z="76eiJmBmCFMpnqxxpKBNkV/WXTQ="/>
         </table:table>

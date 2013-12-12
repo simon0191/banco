@@ -27,8 +27,15 @@ import javax.persistence.Enumerated;
 @RooToString
 @RooJpaActiveRecord(sequenceName = "MOV_SEQ", finders = { "findMovimientoesByCuenta", "findMovimientoesByFechaBetween" })
 public class Movimiento {
+	
+    public Movimiento(Cuenta cuenta, BigDecimal valor, TipoMovimiento tipo) {
+		super();
+		this.cuenta = cuenta;
+		this.valor = valor;
+		this.tipo = tipo;
+	}
 
-    /**
+	/**
      */
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)

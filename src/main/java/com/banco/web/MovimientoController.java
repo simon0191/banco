@@ -1,8 +1,11 @@
 package com.banco.web;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -10,6 +13,7 @@ import javax.validation.Valid;
 import com.banco.domain.Cliente;
 import com.banco.domain.Cuenta;
 import com.banco.domain.Movimiento;
+import com.banco.domain.ReporteCuenta;
 import com.banco.reference.TipoMovimiento;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,6 +37,7 @@ public class MovimientoController {
 
     @RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    	uiModel.addAttribute("consolidado",false);
         if (isAdmin()) {
             if (page != null || size != null) {
                 int sizeNo = size == null ? 10 : size.intValue();
@@ -108,7 +113,28 @@ public class MovimientoController {
     public String findMovimientoesByFechaBetween(@RequestParam("minFecha") @DateTimeFormat(style = "M-") Date minFecha, @RequestParam("maxFecha") @DateTimeFormat(style = "M-") Date maxFecha, 
     		@ModelAttribute("cliente") @RequestParam("cliente") Cliente cliente, Model uiModel) {
     	//cliente = Cliente.findClientesByUsuarioEquals("user1").getSingleResult();
-        uiModel.addAttribute("movimientoes", Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha,cliente).getResultList());
+    	
+    	List<Movimiento> movimientos = Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha,cliente).getResultList();
+    	
+    	
+    	Map<String,ReporteCuenta> mapa = new HashMap<String,ReporteCuenta>();
+    	for(Cuenta c:cliente.getCuentas()) {
+    		mapa.put(c.getNumero(), new ReporteCuenta(c,BigDecimal.ZERO,BigDecimal.ZERO));
+    	}
+    	
+    	for(Movimiento m:movimientos) {
+    		mapa.get(m.getCuenta().getNumero()).add(m.getTipo(),m.getValor());
+    	}
+    	List<ReporteCuenta> movimientosConsolidado = new ArrayList<ReporteCuenta>();
+    	for(String numeroCuenta:mapa.keySet()) {
+    		movimientosConsolidado.add(mapa.get(numeroCuenta));
+    	}
+    	
+    	
+    	uiModel.addAttribute("consolidado",true);
+    	uiModel.addAttribute("movimientos_consolidado",movimientosConsolidado);
+    	
+        uiModel.addAttribute("movimientoes", movimientos);
         addDateTimeFormatPatterns(uiModel);
         return "movimientoes/list";
     }

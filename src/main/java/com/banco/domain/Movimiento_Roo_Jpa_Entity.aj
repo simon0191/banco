@@ -26,6 +26,10 @@ privileged aspect Movimiento_Roo_Jpa_Entity {
     @Column(name = "version")
     private Integer Movimiento.version;
     
+    public Movimiento.new() {
+        super();
+    }
+
     public Long Movimiento.getId() {
         return this.id;
     }
