@@ -1,5 +1,6 @@
 package com.banco.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,12 +63,11 @@ public class CuentaController {
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Cuenta cuenta, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
-		
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, cuenta);
 			return "cuentas/create";
 		}
-		
+		cuenta.setSaldo(BigDecimal.ZERO);
 		if(!Cuenta.findCuentasByNumeroEquals(cuenta.getNumero()).getResultList().isEmpty()) {
 			bindingResult.rejectValue("numero", "account_already_exists");
             populateEditForm(uiModel, cuenta);
@@ -96,7 +96,7 @@ public class CuentaController {
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid Cuenta cuenta, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
-		boolean is_admin = isAdmin();		
+			boolean is_admin = isAdmin();		
 			if (bindingResult.hasErrors()) {
 				populateEditForm(uiModel, cuenta);
 				return "cuentas/update";
@@ -150,6 +150,8 @@ public class CuentaController {
 	}
 	void populateEditForm(Model uiModel, Cuenta cuenta) {
         uiModel.addAttribute("cuenta", cuenta);
+        BigDecimal saldo = (cuenta.getSaldo()==null?BigDecimal.ZERO:cuenta.getSaldo());
+        uiModel.addAttribute("saldo",saldo);
         if(isAdmin()){
         	uiModel.addAttribute("clientes", Cliente.findAllClientes());
         }

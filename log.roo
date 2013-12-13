@@ -81,3 +81,7 @@ quit
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-12 13:31:45
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-12 18:39:28
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-12 22:17:47
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-13 02:54:15
+finder list --class ~.domain.Cliente
+finder add findClientesByUsuarioEquals
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-13 03:44:21

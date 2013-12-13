@@ -6,9 +6,14 @@
         <field:input field="nombre" id="c_com_banco_domain_Cliente_nombre" max="30" min="3" required="true" z="F6mTgcsDFno7XsYXUNYyotZqv+I="/>
         <field:textarea field="direccion" id="c_com_banco_domain_Cliente_direccion" required="true" z="uWImY6K+HUxL73TO8DPdyzOJ0Aw="/>
         <field:input field="telefone" id="c_com_banco_domain_Cliente_telefone" required="true" z="xS9JpVLhmNP5jNnxdKisiILAfOk="/>
-        <field:simple field="cuentas" id="c_com_banco_domain_Cliente_cuentas" messageCode="entity_reference_not_managed" messageCodeAttribute="Cuenta" z="MrxdbggBcbpAvIhsHrRWTGYTHkk="/>
-        <field:simple field="roles" id="c_com_banco_domain_Cliente_roles" messageCode="entity_reference_not_managed" messageCodeAttribute="Usuario Rol" z="cRqu+bKuY7day0n4cNokkvbkblc="/>
-        <field:textarea field="usuario" id="c_com_banco_domain_Cliente_usuario" required="true" z="IToh37r5F7NZbaFCwyrq0bAziNs="/>
-        <field:textarea field="password" id="c_com_banco_domain_Cliente_password" required="true" z="z7ocsV78LJGdHh77mwfD1pU6SYM="/>
+        <!-- <field:simple field="cuentas" id="c_com_banco_domain_Cliente_cuentas" messageCode="entity_reference_not_managed" messageCodeAttribute="Cuenta" z="MrxdbggBcbpAvIhsHrRWTGYTHkk="/> -->
+        <!-- <field:simple field="roles" id="c_com_banco_domain_Cliente_roles" messageCode="entity_reference_not_managed" messageCodeAttribute="Usuario Rol" z="cRqu+bKuY7day0n4cNokkvbkblc="/> -->
+        <field:input field="usuario" id="c_com_banco_domain_Cliente_usuario" required="true" z=""/>
+        <!-- <field:input field="password" id="c_com_banco_domain_Cliente_password" z="" label="New Password"/> -->
+        <p>New Password</p>
+        <input id="c_com_banco_domain_Cliente_password" name="password" type="password" value="${cliente.password}"/>        	
+        <br/>
+        <br/>
+        
     </form:update>
 </div>
