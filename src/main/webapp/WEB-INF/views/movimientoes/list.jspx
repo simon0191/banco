@@ -8,15 +8,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	
 	<c:if test= "${consolidado == true}" >
-		<h1>:D</h1>
-		
-		<c:if test="${consolidado == true}">
-			<h1>:D 2</h1>
-		</c:if>
-		 
-		 
 		<c:if test="${!empty movimientos_consolidado}">
-		
 			<h1>Consolidado</h1>
 			<table>
 				<tr class="thead">
