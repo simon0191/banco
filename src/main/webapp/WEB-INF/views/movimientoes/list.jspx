@@ -9,8 +9,9 @@
 	
 	<c:if test="${consolidado == true}">
 		<h1>:D</h1>
-		<!-- 
+		 
 		<c:if test="${movimientos_consolidado.size() > 0}">
+		<!--
 			<h1>Consolidado</h1>
 			<table>
 				<tr class="thead">
@@ -37,8 +38,9 @@
 				</c:forEach>
 			</table>
 			<h1>Movimientos</h1>
+			-->
 		</c:if>
-		 -->
+		 
 	</c:if>
 	<page:list id="pl_com_banco_domain_Movimiento" items="${movimientoes}"
 		label="Movimiento" z="user-managed">
