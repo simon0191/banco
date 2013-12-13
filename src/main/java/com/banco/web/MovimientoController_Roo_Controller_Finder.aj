@@ -27,11 +27,4 @@ privileged aspect MovimientoController_Roo_Controller_Finder {
         return "movimientoes/list";
     }
     
-    @RequestMapping(params = "find=ByFechaBetween", method = RequestMethod.GET)
-    public String MovimientoController.findMovimientoesByFechaBetween(@RequestParam("minFecha") @DateTimeFormat(style = "M-") Date minFecha, @RequestParam("maxFecha") @DateTimeFormat(style = "M-") Date maxFecha, Model uiModel) {
-        uiModel.addAttribute("movimientoes", Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha).getResultList());
-        addDateTimeFormatPatterns(uiModel);
-        return "movimientoes/list";
-    }
-    
 }
