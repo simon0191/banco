@@ -255,7 +255,7 @@
 			<artifactId>jstl-api</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- SIMON -->
+		
 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -275,7 +275,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
+<!-- SIMON --> 
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -398,6 +398,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
 				<!-- <configuration> <webXml>target/web.xml</webXml> </configuration> -->
+				<configuration><skipTests>true</skipTests></configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
