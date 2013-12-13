@@ -18,4 +18,12 @@ privileged aspect Cuenta_Roo_Finder {
         return q;
     }
     
+    public static TypedQuery<Cuenta> Cuenta.findCuentasByNumeroEquals(String numero) {
+        if (numero == null || numero.length() == 0) throw new IllegalArgumentException("The numero argument is required");
+        EntityManager em = Cuenta.entityManager();
+        TypedQuery<Cuenta> q = em.createQuery("SELECT o FROM Cuenta AS o WHERE o.numero = :numero", Cuenta.class);
+        q.setParameter("numero", numero);
+        return q;
+    }
+    
 }

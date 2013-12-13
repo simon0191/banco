@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_banco_domain_Cuenta" modelAttribute="cuenta" path="/cuentas" versionField="Version" z="CLnqQFQTDkqpgH0H5UTmVo6hUgg=">
         <field:input field="numero" id="c_com_banco_domain_Cuenta_numero" z="7QA//cDSPlameC4G6Lt8bq1/fTw="/>
-        <field:input field="saldo" id="c_com_banco_domain_Cuenta_saldo" min="0" required="true" validationMessageCode="field_invalid_number" z="31tuIf4fUCwr6uim0mhTuI834n4="/>
+        <field:input field="saldo" id="c_com_banco_domain_Cuenta_saldo" min="0" required="true" validationMessageCode="field_invalid_number" z="" disabled="true"/>
         <sec:authorize ifAllGranted="ROLE_ADMIN">
         	<field:select field="cliente" id="c_com_banco_domain_Cuenta_cliente" itemValue="id" items="${clientes}" path="/clientes" z="ZbU92g5OGPjf2tK5M4ttowlCqA0="/>
        	</sec:authorize>

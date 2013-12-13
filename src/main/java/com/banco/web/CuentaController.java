@@ -67,6 +67,13 @@ public class CuentaController {
 			populateEditForm(uiModel, cuenta);
 			return "cuentas/create";
 		}
+		
+		if(!Cuenta.findCuentasByNumeroEquals(cuenta.getNumero()).getResultList().isEmpty()) {
+			bindingResult.rejectValue("numero", "account_already_exists");
+            populateEditForm(uiModel, cuenta);
+            return "cuentas/create";
+		}
+		
 		uiModel.asMap().clear();
 		if(!isAdmin()) {
 			Cliente c = getLoggedCliente();
@@ -93,6 +100,12 @@ public class CuentaController {
 			if (bindingResult.hasErrors()) {
 				populateEditForm(uiModel, cuenta);
 				return "cuentas/update";
+			}
+			Cuenta oldAccount = Cuenta.findCuenta(cuenta.getId());
+			if(!oldAccount.getNumero().equals(cuenta.getNumero()) && !Cuenta.findCuentasByNumeroEquals(cuenta.getNumero()).getResultList().isEmpty()) {
+				bindingResult.rejectValue("numero", "account_already_exists");
+	            populateEditForm(uiModel, cuenta);
+	            return "cuentas/update";
 			}
 			uiModel.asMap().clear();
 			if(!isAdmin()) {
@@ -146,5 +159,4 @@ public class CuentaController {
 		return Cliente.findClientesByUsuarioEquals(SecurityContextHolder.getContext().getAuthentication()
 		.getName()).getSingleResult();
 	}
-
 }

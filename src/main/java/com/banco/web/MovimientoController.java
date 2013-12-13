@@ -92,6 +92,7 @@ public class MovimientoController {
 
     void populateEditForm(Model uiModel, Movimiento movimiento) {
         uiModel.addAttribute("movimiento", movimiento);
+        uiModel.addAttribute("fecha","Dec 14, 2013");
         addDateTimeFormatPatterns(uiModel);
         if(isAdmin()){
         	uiModel.addAttribute("cuentas", Cuenta.findAllCuentas());
@@ -112,7 +113,6 @@ public class MovimientoController {
     @RequestMapping(params = "find=ByFechaBetween", method = RequestMethod.GET)
     public String findMovimientoesByFechaBetween(@RequestParam("minFecha") @DateTimeFormat(style = "M-") Date minFecha, @RequestParam("maxFecha") @DateTimeFormat(style = "M-") Date maxFecha, 
     		@ModelAttribute("cliente") @RequestParam("cliente") Cliente cliente, Model uiModel) {
-    	//cliente = Cliente.findClientesByUsuarioEquals("user1").getSingleResult();
     	
     	List<Movimiento> movimientos = Movimiento.findMovimientoesByFechaBetween(minFecha, maxFecha,cliente).getResultList();
     	
