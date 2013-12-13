@@ -26,5 +26,4 @@ privileged aspect MovimientoController_Roo_Controller_Finder {
         uiModel.addAttribute("movimientoes", Movimiento.findMovimientoesByCuenta(cuenta).getResultList());
         return "movimientoes/list";
     }
-    
 }

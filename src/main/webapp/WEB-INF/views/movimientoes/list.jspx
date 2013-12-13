@@ -14,8 +14,8 @@
 			<h1>:D 2</h1>
 		</c:if>
 		 
-		 <!-- 
-		<c:when test="${movimientos_consolidado.size() > 0}">
+		 
+		<c:if test="${!empty movimientos_consolidado}">
 		
 			<h1>Consolidado</h1>
 			<table>
@@ -44,8 +44,8 @@
 			</table>
 			<h1>Movimientos</h1>
 			
-		</c:when>
-		 -->
+		</c:if>
+		 
 	</c:if>
 	<page:list id="pl_com_banco_domain_Movimiento" items="${movimientoes}"
 		label="Movimiento" z="user-managed">
